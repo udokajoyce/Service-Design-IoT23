@@ -1,0 +1,58 @@
+swagger: '2.0'
+info:
+  title: Flask API Example
+  description: This API provides access to customer data and external weather data.
+  version: 1.0.0
+host: localhost:5000
+schemes:
+  - http
+paths:
+  /api/customers:
+    get:
+      summary: Get all customers
+      responses:
+        200:
+          description: A list of all customers
+        500:
+          description: Error fetching customers
+  /api/customers/{id}:
+    get:
+      summary: Get customer by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+      responses:
+        200:
+          description: Customer found
+        404:
+          description: Customer not found
+  /api/customer:
+    post:
+      summary: Add new customer data
+      parameters:
+        - name: name
+          in: body
+          required: true
+        - name: info
+          in: body
+          required: true
+      responses:
+        201:
+          description: Data added successfully
+        500:
+          description: Error adding data
+  /api/weather:
+    get:
+      summary: Get weather for a city
+      parameters:
+        - name: city
+          in: query
+          required: true
+      responses:
+        200:
+          description: Weather data
+        400:
+          description: City not provided
+        500:
+          description: Error fetching weather
